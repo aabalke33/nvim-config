@@ -16,6 +16,7 @@ require("mason-lspconfig").setup({
     "pyright",
     "sqlls",
     "tailwindcss",
+    "gopls",
     --"biome",
     "volar",
     "lemminx",
@@ -88,6 +89,10 @@ lspconfig.sqlls.setup {
   capabilities = capabilities,
 }
 lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
