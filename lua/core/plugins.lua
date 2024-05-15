@@ -48,6 +48,13 @@ return require('packer').startup(function(use)
     end
   })
 
+  -- sql
+  use {
+  "tpope/vim-dadbod",
+  "kristijanhusak/vim-dadbod-completion",
+  "kristijanhusak/vim-dadbod-ui",
+  }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
