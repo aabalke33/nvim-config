@@ -17,15 +17,17 @@ local servers = {
     "gopls",
     --"volar",
     --"lemminx",
-    "tsserver",
+    "ts_ls",
     "templ",
+    --"htmx"
 }
 
-require("mason").setup({ PATH = "prepend" })
+require("mason").setup({
+    PATH = "prepend",
+})
 require("mason-lspconfig").setup({ ensure_installed = servers })
 
-local lspconfig = require("lspconfig")
-vim.diagnostic.config({ update_in_insert = true })
+vim.filetype.add({ extension = { templ = "templ" } })
 
 local on_attach = function(_, _)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
@@ -39,17 +41,47 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-for _, lsp in ipairs(servers) do
+vim.diagnostic.config({ update_in_insert = true })
 
-    local settings = {}
+local lspconfig = require("lspconfig")
 
-    if lsp == "tsserver" then
-        settings = { documentFormatting = true }
-    end
-
-    lspconfig[lsp].setup {
+local custom_setups = {
+    ['ts_ls'] = {
         on_attach = on_attach,
         capabilities = capabilities,
-        settings = settings
+        settings = { documentFormatting = true }
+    },
+    ['tailwindcss'] = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+        settings = {
+            tailwindCSS = {
+                includeLanguages = {
+                    templ = "html",
+                },
+            },
+        },
+    },
+    ['htmx'] = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "html", "templ" },
+    },
+    ['html'] = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "html", "templ" },
     }
+}
+
+for _, lsp in ipairs(servers) do
+    if custom_setups[lsp] then
+        lspconfig[lsp].setup(custom_setups[lsp])
+    else
+        lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+        }
+    end
 end
