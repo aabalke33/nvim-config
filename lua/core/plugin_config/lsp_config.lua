@@ -20,6 +20,7 @@ local servers = {
     "ts_ls",
     "templ",
     --"htmx"
+    "zls",
 }
 
 require("mason").setup({
@@ -54,7 +55,7 @@ local custom_setups = {
     ['tailwindcss'] = {
         on_attach = on_attach,
         capabilities = capabilities,
-        filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+        filetypes = { "templ", "astro", "javascript", "typescript", "react", "js", "jsx" },
         settings = {
             tailwindCSS = {
                 includeLanguages = {

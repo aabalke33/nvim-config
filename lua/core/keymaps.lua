@@ -1,4 +1,5 @@
 -- <leader> default is "\"
+-- Ctrl + ^ go to last file
 
 vim.opt.showcmd = true
 
@@ -24,3 +25,12 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to prev [D]iagn
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message"})
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic error messages"})
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic Quickfix"})
+
+-- Highlight when yanking
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup("highlight-yank", {clear = true}),
+    callback = function ()
+        vim.highlight.on_yank() 
+    end,
+})
