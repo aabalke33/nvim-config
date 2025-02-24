@@ -4,7 +4,7 @@ local servers = {
     "lua_ls",
     --"bashls",
     "cssls",
-    --"eslint",
+    "eslint",
     "html",
     "jsonls",
     --"jdtls",
@@ -55,7 +55,7 @@ local custom_setups = {
     ['tailwindcss'] = {
         on_attach = on_attach,
         capabilities = capabilities,
-        filetypes = { "templ", "astro", "javascript", "typescript", "react", "js", "jsx" },
+        filetypes = { "templ", "astro", "javascript", "typescript", "react", "js", "jsx", "javascriptreact", "typescriptreact" },
         settings = {
             tailwindCSS = {
                 includeLanguages = {
