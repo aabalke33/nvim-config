@@ -34,3 +34,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank() 
     end,
 })
+
+-- custom string macros
+vim.keymap.set('n', " fp", function ()
+    --vim.api.nvim_put({[[fmt.Printf("\n", )]]}, 'c', true, true)
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, {[[fmt.Printf("\n", )]]})
+  -- Move cursor inside the first quotes
+  vim.api.nvim_win_set_cursor(0, { row, col + 12 })
+  vim.cmd("startinsert")
+end, { desc = "Insert fmt.Printf" })

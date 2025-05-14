@@ -6,7 +6,7 @@ local servers = {
     "cssls",
     --"eslint",
     "html",
-    "jsonls",
+    -- "jsonls",
     --"jdtls",
     --"quick_lint_js",
     "marksman",
